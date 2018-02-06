@@ -15,7 +15,7 @@
         <router-link to="message"><div class="icon-hangouts"></div>消息</router-link>
       </div>
     </div>
-    <router-view :video="video"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
