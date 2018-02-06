@@ -9,6 +9,22 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+//引入express框架 node.js比php更底层代码量会更大,
+// express对node.js进行封装这样代码会更简短,express与php是同级的
+const express = require('express')
+// 实例化express()
+const app = express()
+// 引用moco数据
+const eleData = require('../bilibiliData.json')
+// 分别获取数据中三个不同的值
+const video = eleData.video
+const animate = eleData.animate
+const music = eleData.music
+const dance = eleData.dance
+// 给node.js本地服务器编写接口
+var apiRouter = express.Router()
+//让express实例使用接口路由
+app.use('/', apiRouter)
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -22,6 +38,33 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    before (app) {
+      // 编写get请求配置
+      app.get('/api/video', function (req, res) {
+        res.json({
+          errno: 0,
+          data: video
+        })
+      })
+      app.get('/api/animate', function (req, res) {
+        res.json({
+          errno: 0,
+          data: animate
+        })
+      })
+      app.get('/api/music', function (req, res) {
+        res.json({
+          errno: 0,
+          data: music
+        })
+      })
+      app.get('/api/dance', function (req, res) {
+        res.json({
+          errno: 0,
+          data: dance
+        })
+      })
+    },
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [

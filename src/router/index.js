@@ -13,7 +13,8 @@ let router = new Router({
     {path: '/partitions', name: 'Partitions', component: Partitions},
     {path: '/dynamic', name: 'Dynamic', component: Dynamic},
     {path: '/message', name: 'Message', component: Message}
-  ]
+  ],
+  linkActiveClass: 'active'
 })
 router.push('/homepage')
 export default router

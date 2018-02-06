@@ -15,17 +15,34 @@
         <router-link to="message"><div class="icon-hangouts"></div>消息</router-link>
       </div>
     </div>
-    <router-view/>
+    <router-view :video="video"></router-view>
   </div>
 </template>
 
 <script>
   import EleHeader from './components/header/Header'
-export default {
-  name: 'App',
-  components: {
-    EleHeader
-  }
+  export default {
+    name: 'App',
+    data() {
+      return {
+        video: {}
+      }
+    },
+    components: {
+      EleHeader
+    },
+    created() {
+      this.$axios.get('/api/video')
+        .then((res) => {
+          res = res.data
+          if (res.errno === 0) {
+            this.video = res.data
+          }
+        })
+        .catch((error) => {
+          alert(error)
+        })
+    }
 }
 </script>
 
