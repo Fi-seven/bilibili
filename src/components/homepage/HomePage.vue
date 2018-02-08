@@ -1,14 +1,16 @@
 <template>
     <div class="video">
+      <div class="test"></div>
       <div class="video-wrapper" ref="videoWrapper">
         <ul>
           <li v-for="item in video"
               class="video-item"
               :key="item.aid">
-            <div class="pic">{{item.aid}}</div>
-            <div class="text"></div>
-            <div class="dec"></div>
-
+            <div class="photo">
+              <img :src="item.pic" width="160" height="100"/>
+            </div>
+            <div class="video-text">{{item.description}}</div>
+            <div class="video-dec">{{item.typename}}</div>
           </li>
         </ul>
       </div>
@@ -60,21 +62,31 @@ export default {
   .video
     display flex
     position absolute
-    top 100px
+    top 60px
     bottom 46px
     width 100%
     overflow hidden
     background-color: #E5E5E5
     .video-wrapper
-      flex 0 0 170px
-      /*width 100px*/
+      flex 0 0 auto
+      width 100%
       height 100%
-      /*display inline-block*/
       .video-item
         position relative
-        height 170px
+        height 160px
         width 160px
         border-radius 5px
         background-color: #fff
-        border 1px solid #000
+        border 1px solid #ccc
+        .video-text
+          height 30px
+          padding 0px 0px 0px 5px
+          font-size 16px
+          white-space nowrap
+          overflow hidden
+          text-overflow ellipsis
+        .video-dec
+          color gray
+          padding 0px 0px 0px 7px
+          font-size 14px
 </style>
